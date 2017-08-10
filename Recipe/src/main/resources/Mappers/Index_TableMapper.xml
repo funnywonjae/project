@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.wj.Mappers.Index_TableMapper">
+  	
+  	
+  	
+  	<!-- 테이블 이름 넣으면 인덱스 코드가 나옴 -->
+	<select id="getTableIndex"  resultType="String">
+	
+	<![CDATA[
+	select group_concat(first,second,count_num) 
+	as table_index from index_table where category = #{category};
+	]]>
+	
+	</select>
+
+	<update id="modTableSecond">
+	
+	<![CDATA[
+	
+	UPDATE INDEX_TABLE 
+	SET SECOND = (select lpad(#{usr_index},4,'0'))
+	, COUNT_NUM="00000000" 
+	WHERE CATEGORY=#{tableCategory};
+	
+	]]>
+	</update>
+	
+	<update id="modTableCount_num">
+	
+	<![CDATA[
+
+	UPDATE INDEX_TABLE SET COUNT_NUM = (select lpad(#{usr_index},8,'0')) 
+	WHERE CATEGORY=#{tableCategory};
+
+
+	]]>
+
+	
+	</update>
+	
+	     </mapper>

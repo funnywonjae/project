@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wj.Mappers.UserInfoMapper">
+
+	<!-- 로그인할때 id pwd 체크 있으면 count라는 컬럼으로 1이라는 값이 나옴 -->
+	<select id="userLogin" resultType="int">
+
+  <![CDATA[  
+			SELECT COUNT(*) FROM USERINFO   
+			WHERE USR_ID= #{usr_id} AND USR_PWD=#{usr_pwd};
+	]]>
+
+	</select>
+	<!-- 회원가입 -->
+	<insert id="userRegist">
+
+	<![CDATA[
+	INSERT INTO USERINFO 
+	VALUES(#{usr_id},#{usr_pwd},#{usr_index},
+	#{usr_email},#{usr_grade},#{usr_birth},
+	#{usr_gender},#{usr_platform},
+	#{usr_name},#{usr_bookmark});
+	]]>
+
+	</insert>
+
+
+</mapper>
